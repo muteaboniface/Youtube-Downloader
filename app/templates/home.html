@@ -1,0 +1,69 @@
+<html>
+<title>Download</title>
+<link href="{{ url_for('static', path='/style.css') }}" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+<script src="https://use.fontawesome.com/cd337585e7.js"></script>
+<body>
+
+<section class="vh-100">
+  <div class="container-fluid h-custom">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-md-9 col-lg-6 col-xl-5">
+        <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.webp"
+          class="img-fluid" alt="Sample image">
+      </div>
+      <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
+        <form class="form" action="download" method="POST" accept-charset="UTF-8" enctype="multipart/form-data">
+          <div class="d-flex flex-row align-items-center justify-content-center justify-content-lg-start p-1">
+<!--            <div class="spinner-grow text-success" role="status">-->
+<!--            <span class="sr-only">Loading...</span>-->
+<!--            </div>-->
+              <p class="lead fw-normal mb-0 me-3 text-info font-weight-bold">Download from YouTube!!!</p>
+          </div>
+            {% if(data) %}
+            <div class="text-success"><p  class="lead fw-normal mb-0 me-3 text-secondaryfont-weight-bold">{{ data }}</p></div>
+            {% endif %}
+
+          <!-- Youtube link here-->
+          <div class="form-outline mb-4">
+            <input type="text" id="form3Example3" name="link" class="form-control form-control-lg"
+              placeholder="Past youtube link here" required minlength="10" />
+          </div>
+
+
+          <div class="text-center text-lg-start mt-4 pt-2">
+            <button type="submit" id="btnFetch" class="spinner-button btn btn-primary btn-lg text-info"
+              style="padding-left: 2.5rem; padding-right: 2.5rem;" >Download</button>
+          </div>
+
+        </form>
+      </div>
+    </div>
+  </div>
+  <div
+    class="d-flex flex-column flex-md-row text-center text-md-start justify-content-between py-4 px-4 px-xl-5 bg-primary">
+    <!-- Copyright -->
+    <div class="text-white mb-3 mb-md-0">
+      Copyright © <script>document.write(new Date().getFullYear())</script>. All rights reserved.
+    </div>
+    <!-- Copyright -->
+  </div>
+</section>
+
+      <script type="text/javascript">
+          $(document).ready(function() {
+    $("#btnFetch").click(function() {
+      // disable button
+      $(this).prop("disabled", true);
+      // add spinner to button
+      $(this).html(
+        '<i class="fa fa-circle-o-notch fa-spin"></i> loading...'
+      );
+    });
+});
+
+      </script>
+
+
+</body>
+</html>
