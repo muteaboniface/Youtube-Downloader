@@ -5,6 +5,7 @@ from pytube import YouTube
 from datetime import datetime
 import os
 from pydantic import BaseModel
+from pathlib import Path
 
 templates = Jinja2Templates(directory="app/templates")
 root = APIRouter()
@@ -44,20 +45,21 @@ async def download(request: Request, link: str = Form(...)):
             data = video.streams.get_highest_resolution()
 
             # save video
-            DESTINATION_FOLDER = 'C:/Users/warui/Videos'
-            if os.path.exists(DESTINATION_FOLDER):
+            destination_folder = str(Path.home() / "Downloads")
+            path = destination_folder
+            if os.path.exists(destination_folder):
                 print("Downloading...")
                 now = datetime.now()
             else:
-                os.mkdir(DESTINATION_FOLDER)
+                os.mkdir(destination_folder)
                 print("Downloading...")
                 now = datetime.now()
-            data.download(DESTINATION_FOLDER, timeout=60, max_retries=1)
+            data.download(destination_folder, timeout=60, max_retries=1)
             end = datetime.now()
             print("Download completed!!")
             print(f'Elapsed time: {end - now}')
             response = "Successfully downloaded video"
-            return templates.TemplateResponse("home.html", {"request": request, "data": response})
+            return templates.TemplateResponse("home.html", {"request": request, "data": response, "path": path})
     except Exception as e:
         print(e)
         response = "Failed to download video"
