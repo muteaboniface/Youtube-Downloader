@@ -47,6 +47,7 @@ async def download(request: Request, link: str = Form(...)):
             # save video
             destination_folder = str(Path.home() / "Downloads")
             path = destination_folder
+            print(">>>>>>>>>>>>>>>>path is "+path)
             if os.path.exists(destination_folder):
                 print("Downloading...")
                 now = datetime.now()
